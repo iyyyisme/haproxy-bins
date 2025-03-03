@@ -96,6 +96,7 @@ function get_last_pcre2_release() {
     # Download the package
     wget --timestamping --quiet https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.45/pcre2-10.45.tar.gz || FUNC_EXIT_CODE=$?
     # wget --timestamping --quiet "https://github.com/PCRE2Project/pcre2/releases/download/${LAST_RELEASE}/${LAST_RELEASE}.tar.gz" || FUNC_EXIT_CODE=$?
+   LAST_RELEASE="pcre2-10.45.tar.gz"
     if [ $FUNC_EXIT_CODE -ne 0 ]; then
         echo -e "[X] Download of '${LAST_RELEASE}.tar.gz' fails."
         return $FUNC_EXIT_CODE
