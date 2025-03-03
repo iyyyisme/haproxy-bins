@@ -40,7 +40,7 @@ jobs:
           bash ./scripts/build-binaries.sh
 
       - name: Archive built artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: cached-binaries-${{ github.run_id }}
           path: ./build
@@ -52,7 +52,7 @@ jobs:
     steps:
       - name: Download archived built artifacts
         id: download-artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: cached-binaries-${{ github.run_id }}
 
@@ -73,7 +73,7 @@ jobs:
 
       - name: Download built artifacts
         id: download-artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: cached-binaries-${{ github.run_id }}
           path: release
