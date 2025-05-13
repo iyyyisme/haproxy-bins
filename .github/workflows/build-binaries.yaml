@@ -30,7 +30,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ./build
-          key: cached-binaries-${{ github.run_id }}
+          key: cached-binaries-${{ matrix.architectures }}-${{ github.run_id }}
 
       - name: Execute the script
         env:
