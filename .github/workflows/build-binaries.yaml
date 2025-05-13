@@ -54,7 +54,7 @@ jobs:
         id: download-artifacts
         uses: actions/download-artifact@v4
         with:
-          name: cached-binaries-${{ matrix.architectures }}-${{ github.run_id }}
+          name: cached-binaries-x86_64-${{ github.run_id }}
 
       - name: List binaries
         run: |
@@ -75,7 +75,7 @@ jobs:
         id: download-artifacts
         uses: actions/download-artifact@v4
         with:
-          name: cached-binaries-${{ matrix.architectures }}-${{ github.run_id }}
+          name: cached-binaries-x86_64-${{ github.run_id }}
           path: release
 
       - name: Create release draft
