@@ -42,7 +42,7 @@ jobs:
       - name: Archive built artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: cached-binaries-${{ github.run_id }}
+          name: cached-binaries-${{ matrix.architectures }}-${{ github.run_id }}
           path: ./build
 
   show-binaries:
