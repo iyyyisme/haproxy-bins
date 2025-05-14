@@ -55,11 +55,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: cached-binaries-x86_64-${{ github.run_id }}
-
-      - name: Download aarch64 archived built artifacts
-        id: download-artifacts
-        uses: actions/download-artifact@v4
-        with:
           name: cached-binaries-aarch64-${{ github.run_id }}
 
       - name: List binaries
@@ -82,12 +77,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: cached-binaries-x86_64-${{ github.run_id }}
-          path: release
-
-- name: Download aarch64 built artifacts
-        id: download-artifacts
-        uses: actions/download-artifact@v4
-        with:
           name: cached-binaries-aarch64-${{ github.run_id }}
           path: release
 
