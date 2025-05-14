@@ -30,7 +30,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ./build
-          key: cached-binaries-${{ matrix.architectures }}-${{ github.run_id }}
+          key: cached-binaries-${{ github.run_id }}
 
       - name: Execute the script
         env:
@@ -49,35 +49,39 @@ jobs:
     needs:
       - build-binaries
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        architectures: [ x86_64, aarch64]
     steps:
-      - name: Download x86_64 archived built artifacts
+      - name: Download archived built artifacts
         id: download-artifacts
         uses: actions/download-artifact@v4
         with:
-          name: cached-binaries-x86_64-${{ github.run_id }}
-          name: cached-binaries-aarch64-${{ github.run_id }}
+          name: cached-binaries-${{ matrix.architectures }}-${{ github.run_id }}
 
       - name: List binaries
         run: |
           ls ${{steps.download-artifacts.outputs.download-path}}
 
   create-release-draft:
-   needs:
+    needs:
       - show-binaries
     permissions:
       contents: write
       pull-requests: write
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        architectures: [ x86_64, aarch64]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Download x86_64 built artifacts
+      - name: Download built artifacts
         id: download-artifacts
         uses: actions/download-artifact@v4
         with:
-          name: cached-binaries-x86_64-${{ github.run_id }}
-          name: cached-binaries-aarch64-${{ github.run_id }}
+          name: cached-binaries-${{ matrix.architectures }}-${{ github.run_id }}
           path: release
 
       - name: Create release draft
