@@ -50,18 +50,24 @@ jobs:
       - build-binaries
     runs-on: ubuntu-latest
     steps:
-      - name: Download archived built artifacts
+      - name: Download x86_64 archived built artifacts
         id: download-artifacts
         uses: actions/download-artifact@v4
         with:
           name: cached-binaries-x86_64-${{ github.run_id }}
+
+      - name: Download aarch64 archived built artifacts
+        id: download-artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: cached-binaries-aarch64-${{ github.run_id }}
 
       - name: List binaries
         run: |
           ls ${{steps.download-artifacts.outputs.download-path}}
 
   create-release-draft:
-    needs:
+   needs:
       - show-binaries
     permissions:
       contents: write
@@ -71,11 +77,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Download built artifacts
+      - name: Download x86_64 built artifacts
         id: download-artifacts
         uses: actions/download-artifact@v4
         with:
           name: cached-binaries-x86_64-${{ github.run_id }}
+          path: release
+
+- name: Download aarch64 built artifacts
+        id: download-artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: cached-binaries-aarch64-${{ github.run_id }}
           path: release
 
       - name: Create release draft
